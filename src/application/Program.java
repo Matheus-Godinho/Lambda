@@ -29,8 +29,8 @@ public class Program {
 				"Alex,alex@gmail.com,1900.00", "Marco,marco@gmail.com,1700.00",
 				"Bob,bob@gmail.com,3500.00", "Anna,anna@gamil.com,2800.00");
 			
-		//path = sc.next();
-		path = "c:\\temp\\in.txt";
+		System.out.printf("Enter full file path: ");
+		path = sc.next();
 		file = new File(path);
 		try {
 			try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
@@ -62,13 +62,14 @@ public class Program {
 			double minValue;
 			List<String> emails;
 			
-			//minValue = sc.nextDouble();
-			minValue = 2000.00;
+			System.out.printf("Enter salary: ");
+			minValue = sc.nextDouble();
 			emails = employees.stream()
 					.filter(e -> e.getSalary() > minValue)
 					.map(e -> e.getEmail())
 					.sorted()
 					.collect(Collectors.toList());
+			System.out.printf("Email of people whose salary is more than %.2f:%n", minValue);
 			emails.forEach(System.out::println);
 			
 			double salarySum;
@@ -77,7 +78,7 @@ public class Program {
 					.filter(e -> e.getName().charAt(0) == 'M')
 					.map(e -> e.getSalary())
 					.reduce(0.00, (s1, s2) -> s1 + s2);
-			System.out.printf("%.2f", salarySum);
+			System.out.printf("Sum of salary of people whose name starts with 'M': %.2f", salarySum);
 			
 		}
 		catch (FileNotFoundException e) {
